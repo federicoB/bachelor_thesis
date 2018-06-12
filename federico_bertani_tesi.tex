@@ -154,9 +154,10 @@
 % \usepackage{fixltx2e}					%Eliminates some in felicities of the 
 									%original LaTeX kernel
 \usepackage[spanish,english]{babel}		%For languages characters and hyphenation
-\usepackage{color}                    				%Creates coloured text and background
+\usepackage{color}                                             %Creates coloured text and background
 \usepackage[colorlinks=true,
-		     allcolors=black]{hyperref}              %Creates hyperlinks in cross references
+                    allcolors=black,
+                    final,bookmarks]{hyperref}              %Creates hyperlinks in cross references
 \usepackage{memhfixc}					%Must be used on memoir document 
 									%class after hyperref
 \usepackage{enumerate}					%For enumeration counter
@@ -328,7 +329,7 @@
 %
 \renewcommand{\contentsname}{Table of Contents}
 \maxtocdepth{subsection}
-\tableofcontents*
+\tableofcontents
 \addtocontents{toc}{\par\nobreak \mbox{}\hfill{\bf Page}\par\nobreak}
 \clearemptydoublepage
 %
@@ -346,6 +347,26 @@
 \mainmatter
 %
 \import{chapters/chapter01/}{chap01.tex}
+\clearemptydoublepage
+\import{chapters/chapter02-state_of_art/}{chap02.tex}
+\clearemptydoublepage
+\import{chapters/chapter03-mathematical_background/}{chap03.tex}
+\clearemptydoublepage
+\import{chapters/chapter04_language_and_libraries_choices/}{chap04.tex}
+\clearemptydoublepage
+\import{chapters/chapter05-input_data_cleaning/}{chap05.tex}
+\clearemptydoublepage
+\import{chapters/chapter06-rotations_with_quaternions/}{chap06.tex}
+\clearemptydoublepage
+\import{chapters/chapter07-trajectory_integration/}{chap07.tex}
+\clearemptydoublepage
+\import{chapters/chapter08-blender_add-on/}{chap08.tex}
+\clearemptydoublepage
+\import{chapters/chapter09-software_engineering_considerations/}{chap09.tex}
+\clearemptydoublepage
+\import{chapters/chapter10-future_development/}{chap10.tex}
+\clearemptydoublepage
+\import{chapters/chapter11-conclusions/}{chap11.tex}
 \clearemptydoublepage
 %
 %

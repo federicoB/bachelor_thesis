@@ -1,0 +1,18 @@
+\let\textcircled=\pgftextcircled
+\chapter{Mathematical background}
+\label{chap:math_background}
+
+\initial{I}n this chapter I will introduce some mathematical and physics notion used in the project.
+The first part of the chapter deals with numerical integration, a tecnique used to computationally calculate the integral of physics quantities like acceleration and velocity to get the trajectory traveled by the vehicle.
+The second part deals with quaternion, a number system useful to handle rotations in tridimensional space more efficient and numerically stable than rotation matrices.
+
+\section{Numerical integration}
+
+\section{Quaternions}
+Quaternions are an extension of complex numbers usually represented in the form:
+$$ a + xi + yj + wk $$
+where $a, x, y, w$ are real numbers and $i, j, k$ are called \textit{quaternion units} \\
+with the property ${ijk=-1}$
+$a$ is also called \textit{scalar} or \textit{real} part of the quaternion, while $x,y,w$ is the tridimensional \textit{vector} or \textit{imaginary} part. \\
+Quaternions have been formalized by the irish mathematician William Hamilton in 1843. \\
+If the scalar part is equal zero then the quaternion is \textit{pure} \\
