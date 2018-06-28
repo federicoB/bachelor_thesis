@@ -1,7 +1,7 @@
 \title{Reconstruction of vehicle dynamics from inertial and GNSS data}
 \RequirePackage[l2tabu]{nag}		% Warns for incorrect (obsolete) LaTeX usage
 
-\documentclass[a4paper,11pt,leqno,openbib,oldfontcommands,draft]{memoir} %add 'draft' to turn draft option on (see below)
+\documentclass[a4paper,11pt,leqno,openbib,oldfontcommands]{memoir} %add 'draft' to turn draft option on (see below)
 %
 %
 % Adding metadata:
@@ -144,6 +144,8 @@
 \usepackage{wasysym}					%More math symbols
 \usepackage{mathrsfs}					%Even more math symbols
 \usepackage{float}						%Helps to place figures, tables, etc. 
+\floatstyle{boxed} 
+\restylefloat{figure}
 \usepackage{verbatim}					%Permits pre-formated text insertion
 \usepackage{upgreek }					%Calls other kind of greek alphabet
 \usepackage{latexsym}					%Extra symbols
@@ -157,7 +159,7 @@
 \usepackage{color}                                             %Creates coloured text and background
 \usepackage[colorlinks=true,
                     allcolors=black,
-                    final,bookmarks]{hyperref}              %Creates hyperlinks in cross references
+                    bookmarks]{hyperref}              %Creates hyperlinks in cross references
 \usepackage{memhfixc}					%Must be used on memoir document 
 									%class after hyperref
 \usepackage{enumerate}					%For enumeration counter
@@ -169,7 +171,7 @@
 									%verbatim-like environment
 \usepackage[version=0.96]{pgf}			%PGF/TikZ is a tandem of languages for producing vector graphics from a 
 \usepackage{tikz}						%geometric/algebraic description.
-\usepackage[final]{listings}				% for source code
+\usepackage{listings}				% for source code
 \usetikzlibrary{arrows,shapes,snakes,
 		       automata,backgrounds,
 		       petri,topaths}				%To use diverse features from tikz		
@@ -333,6 +335,8 @@
 \tableofcontents
 \addtocontents{toc}{\par\nobreak \mbox{}\hfill{\bf Page}\par\nobreak}
 \clearemptydoublepage
+
+Please visit \href{https://github.com/federicoB/bachelor_thesis}{this webpage} to find an update version of this document
 %
 \listoftables
 \addtocontents{lot}{\par\nobreak\textbf{{\scshape Table} \hfill Page}\par\nobreak}
