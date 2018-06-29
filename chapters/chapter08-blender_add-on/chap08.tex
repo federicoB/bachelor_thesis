@@ -2,12 +2,50 @@
 \chapter{Blender add-on}
 \label{chap:blender_add_on}
 
-Blender has a python application programming interface (API). Through the API, one can create a python module as a Blender addon-on. Add-ons is extension of Blender basic functionality, managed by a section of Blender settings and installable by file.
+Blender has a python application programming interface (API). Through the API, one can create a python module as a Blender add-on. Add-ons are extension of Blender basic functionality, managed by a section of Blender settings and installable by file.
 An alternative to add-on to interact programmatically with Blender is to create a python script and load it into the built-in text editor and execute it or by giving it as parameter launching Blender from the command line.
 Add-ons provide versioning and authoring, remain activated through changing between Blender files and doesn't need to be loaded each time.
 
-\section{Blender addon-on anatomy}
-Ad addon-on can be a single python file or a zip containing an \texttt{\_\_init\_\_.py} file and others. \\
-In both cases the main python file must have a  \texttt{register()} and \texttt{unregister()} function implemented.
+\section{Blender API}
+All the operations are made through \texttt{bpy} python module.
+\texttt{bpy} can be subdivided additionally mainly to:
+\begin{itemize}
+\item \texttt{bpy.context}: access to current active scene and elements.
+\item \texttt{bpy.data}: access to all objects in Blender document.
+\item \texttt{bpy.types}: built-in python classes, usually extended.
+\item \texttt{bpy.props}: abstraction of a variable. properties of type \texttt{by.types.*Property} registered in \texttt{bpy.props} will be modifiable by graphical interface.
+\end{itemize}
+From \texttt{bpy.types} other classes used in the projects are:
+\begin{itemize}
+\item Operator: essentialy a function to manipulate objects.
+\item Panel: a section of the graphical interface.
+\end{itemize}
+
+\section{Blender add-on anatomy}
+Ad add-on can be a single python file or a zip containing an \texttt{\_\_init\_\_.py} file and other complementary files. \\
+In both cases the main python file must have a \texttt{register()} and \texttt{unregister()} function implemented. \\
+The \texttt{unregister()} takes care of calling \texttt{rbpy.utils.unregister\_class()} for each class that need to be loaded into Blender. \\
+When loading a class, Blender performs sanity checks making sure all required properties and functions are found, that properties have the correct type and that functions have the right number of arguments. \texttt{register()} function of registered class are called recursively and, for example, \texttt{Panels }are drawn on user interface at this moment. \\
+The \texttt{unregister()} have a totally opposite task compared to \texttt{register()}. \\
+It should call \texttt{rbpy.utils.unregister\_class()} on every register call. It's preferable make the calls in the reverse order compared to \texttt{register()}. \\
+Other objects defined in the python add-on are:
+\begin{itemize}
+\item subclass of \texttt{Panel} for user-interface, a button to open a file system explorer dialog to select input dataset, a editable text field showing input dataset path and a button to launch dynamic reconstruction.
+\item \texttt{StringProperty} for storing input dataset file path and to sharing it between operators.
+\item subclasses of \texttt{Operator} for reaction to pressing buttons on user interface and calling related project functions. 
+\end{itemize}
+Finally, a python dictionary called \texttt{bl\_info} is defined with add-on metadata as name, version and author. Those data is displayed in list of add-ons of Blender settings.
 
 \section{Installation of dependencies}
+One particular challenge I faced is to have project library dependencies installed in blender internal interpreter. \\
+There are 3 solution to this problem. The 2 solutions i discarded are: 
+\begin{itemize}
+\item Removing the Blender python folder and Blender will fallback to system interpreter. But API supported python version can be different to system and doing this is dangerous.
+\item Changing \textit{Scripts path} Blender setting, to look to an another directory with a specific structure. This directory must contains \texttt{add-ons, modules} and \texttt{startup} directories. Project dependencies should be installed in \texttt{modules} directory. There are various problems to this solution: it can be easily made non-working by a Blender update removing possibility of changing \textit{Scripts path}, it can be against Blender user will and previous installed add-ons must be moved to new directory.
+\end{itemize}
+The solution is decided to follow and implement is to increase Blender interpreter capabilities by installing the \textbf{pip} package manager on it and then using \textit{pip} to install the dependencies listed in the \texttt{requirements.txt} file. The whole process can be labeled as \textit{bootstrapping} as we start from a very small capabilities and we use it to have at each step more. \\
+First step is to download a python script with \textit{pip} binary included inside. To do this is very useful the \texttt{get-pip.py} script. \cite{}
+Then \texttt{get-pip.py} must be interpreted by the Blender interpreter so it will be linked to it.  \\
+In the Blender python directory it will be created a pip executable so project dependencies can be installed with it and modules will be linked to. \\
+Including the code to do this process in the add-on is crucial to have a single \texttt{zip} to distribute and increase final user experience. \\
+This part has been a bit tricky for difference between operating system, both for difference in Blender installation and add-on paths and operating system interface to execute programs. \\
