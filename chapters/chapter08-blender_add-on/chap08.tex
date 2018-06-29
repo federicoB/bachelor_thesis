@@ -1,3 +1,13 @@
 %\let\textcircled=\pgftextcircled
 \chapter{Blender add-on}
 \label{chap:blender_add_on}
+
+Blender has a python application programming interface (API). Through the API, one can create a python module as a Blender addon-on. Add-ons is extension of Blender basic functionality, managed by a section of Blender settings and installable by file.
+An alternative to add-on to interact programmatically with Blender is to create a python script and load it into the built-in text editor and execute it or by giving it as parameter launching Blender from the command line.
+Add-ons provide versioning and authoring, remain activated through changing between Blender files and doesn't need to be loaded each time.
+
+\section{Blender addon-on anatomy}
+Ad addon-on can be a single python file or a zip containing an \texttt{\_\_init\_\_.py} file and others. \\
+In both cases the main python file must have a  \texttt{register()} and \texttt{unregister()} function implemented.
+
+\section{Installation of dependencies}
