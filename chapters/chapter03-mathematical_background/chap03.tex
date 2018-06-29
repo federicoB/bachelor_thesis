@@ -4,7 +4,7 @@
 
 \initial{I}n this chapter I will introduce some mathematical and physics notion used in the project.
 The first part of the chapter deals with numerical integration, a tecnique used to computationally calculate the integral of physics quantities like acceleration and velocity to get the trajectory traveled by the vehicle.
-The second part deals with quaternion, a number system useful to handle rotations in tridimensional space more efficient and numerically stable than rotation matrices.
+The second part deals with quaternion, a number system useful to handle rotations in tridimensional space more efficient and numerically more stable than rotation matrices.
 
 \section{Numerical integration}
 
@@ -15,7 +15,7 @@ where $a, x, y, w$ are real numbers and $i, j, k$ are called \textit{quaternion 
 with the property ${ijk=-1}$  \\
 $a$ is also called \textit{scalar} or \textit{real} part of the quaternion, while $x,y,w$ is the tridimensional \textit{vector} or \textit{imaginary} part. \cite{amslaurea6701} \\
 Quaternions have been formalized by the Irish mathematician William Hamilton in 1843. \\
-If the scalar part is equal zero then the quaternion is called \textit{pure}.
+If the scalar part is equal to zero then the quaternion is called \textit{pure}.
 
 \subsection{Vector rotations with quaternions}
 Given a point $\boldsymbol{v} \in \mathbb{R}^3$ its rotation around versor $\boldsymbol{x}=\{a_x, a_y, a_z\}$ by an angle $\theta$ can be obtained in the following way:
@@ -45,20 +45,20 @@ by the anticommutative property of vector product \cite{amslaurea6701} \\
 $$ \boldsymbol{a} \times \boldsymbol{b} = - (\boldsymbol{b} \times \boldsymbol{a}) $$ 
 
 \subsection{Comparison with rotation matrices}
-Matrices can also be used to perform rotation. \cite{} given a vector $\boldsymbol{v}$, a rotation angle $\theta$ and some versor $\boldsymbol{x}=\{a_x, a_y, a_z\}$  \\
-\textit{Optional TODO: show how to get a matrix from axis angle and how to make rotations} \\
-A quaternion can be associated with a rotarion matrix and and vice versa. \cite{amslaurea6701,Eberly2016RotationRA} \\
-Aside from memory usage, where quaternions are more efficient, the time complexity must take account conversion from rotation system, as from axis-angle in our case, and actual context of usage as explained after.  \\
-Performance can be evaluated at high-level by counting the numer of operation needed to perform conversion and rotations. Operations like additions or subtractions, multiplications, divisions and trigonometric function evaluations like sines and cosines. \\
-In the following analysis i will leave out performance optimization that computer systems can apply in some situations. Just looking at number of operations should give a general idea of difference between rotation representations. \\
-Axis-angle to matrix requires 13 additions, 15 multiplications and 2 trigonometric calls. \\
-Axis-angle to quaternion requires 4 multiplications and 2 trigonometric calls. \\
+Matrices can also be used to perform rotation. \cite{Eberly2016RotationRA} given a vector $\boldsymbol{v}$, a rotation angle $\theta$ and a versor $\boldsymbol{x}=\{a_x, a_y, a_z\}$  \\
+% Optional TODO: show how to get a matrix from axis angle and how to make rotations} 
+A quaternion can be associated with a rotation matrix and and vice versa. \cite{amslaurea6701,Eberly2016RotationRA} \\
+Aside from memory usage, where quaternions are more efficient, the time complexity must take account conversion from rotation system, as from axis-angle in our case, and actual context of usage as explained in the following.  \\
+Performance can be evaluated at high-level by counting the numer of operations needed to perform conversion and rotations. operations like additions or subtractions, multiplications, divisions and trigonometric function evaluations like sines and cosines. \\
+In the following analysis I will leave out performance optimization that computer systems can apply in some situations. Just looking at number of operations should give a general idea of difference between rotation representations. \\
+Axis-angle to matrix conversion requires 13 additions, 15 multiplications and 2 trigonometric calls. \\
+Axis-angle to quaternion conversion requires 4 multiplications and 2 trigonometric calls. \\
 Rotating a vector using a rotation matrix requires 5 additions and 9 multiplications. \\
-Rotating a vector using a quaternion, optimizing using the fact that scalar part is zero, requires 17 additions and and 24 multiplications. \\
+Rotating a vector using a quaternion, optimizing using the fact that scalar part is to zero, requires 17 additions and and 24 multiplications. \\
 So it results that rotation matrix are more efficient in rotating a vector. \\
 The real advantage of quaternion are rotation composition. 
 Indeed, composing two quaternion require only 12 additions and 16 multiplications while matrices 18 additions and 27 multiplications. \\
-In the end, having n vectors to rotate by a cumulative n angles represented as axis-angle notation the following comparison can be made:
+In the end, having $n$ vectors to rotate by a cumulative $n$ angles represented as axis-angle notation the following comparison can be made:
 \begin{itemize}
 \item rotation matrices: ${((13A + 15M + 2F) + (5A + 9M) + (18A + 27M))n} = {(36A + 51M + 2F)n}$
 \item quaternions: ${((4M + 2F) + (17A + 24M) + (12A + 16M))n} = {(29A + 44M + 2F)n}$
