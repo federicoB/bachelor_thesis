@@ -55,10 +55,13 @@ Axis-angle to matrix conversion requires 13 additions, 15 multiplications and 2 
 Axis-angle to quaternion conversion requires 4 multiplications and 2 trigonometric calls. \\
 Rotating a vector using a rotation matrix requires 5 additions and 9 multiplications. \\
 Rotating a vector using a quaternion, optimizing using the fact that scalar part is to zero, requires 17 additions and and 24 multiplications. \\
+% add table?
 So it results that rotation matrix are more efficient in rotating a vector. \\
 The real advantage of quaternion are rotation composition. 
 Indeed, composing two quaternion require only 12 additions and 16 multiplications while matrices 18 additions and 27 multiplications. \\
-In the end, having $n$ vectors to rotate by a cumulative $n$ angles represented as axis-angle notation the following comparison can be made:
+What follows in a comparison analysis of the number of operations required to rotate $n$ vectors by a cumulative $n$ angles represented as axis-angle notation.
+Those abbrevesion are used: A: Additions / subtractions, M : Multiplications / Divisions, F: trigonometric Functions
+%TODO convert to table?
 \begin{itemize}
 \item rotation matrices: ${((13A + 15M + 2F) + (5A + 9M) + (18A + 27M))n} = {(36A + 51M + 2F)n}$
 \item quaternions: ${((4M + 2F) + (17A + 24M) + (12A + 16M))n} = {(29A + 44M + 2F)n}$

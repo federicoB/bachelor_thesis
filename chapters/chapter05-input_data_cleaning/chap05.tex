@@ -33,7 +33,7 @@ The choice of a value for window size is important. A value too small can lead t
 % TODO talk about null values and the need to slice
 
 \section{Correction of vertical alignment}
-Box vertical unalignment is corrected by looking at gravitational acceleration on stationary times. The accelerometer doesn't remove it by default so I use it for ground truth of terrain position.
+Box vertical unalignment is corrected by looking at gravitational acceleration on stationary times. The accelerometer doesn't remove it by default so I use it for ground truth of terrain position. This tecnique only works assuming the vehicle rest on a flat surface. 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{kia_bad_z_align.jpg}
 \caption{Axes shows a sensor bad vertical alignment}
