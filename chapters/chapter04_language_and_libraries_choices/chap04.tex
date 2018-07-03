@@ -3,16 +3,16 @@
 \label{chap:programming_language_library_choices}
 
 \section{Python}
-For this project the Python programming language \cite{python-website} was choosen. \\
-Python is increasingly being used by the scientific community for its large collections of packages. It allows to link normal python code to C / C++ extension when performance optimization is critically important. \\
-In addition, Blender only offer a Python API.
-The used python implementation is the standard CPython. \\
+For this project, the Python programming language was choosen. \cite{python-website} \\
+Python is increasingly being used by the scientific community for its large collection of packages. It allows to link normal Python code to C / C++ extension when performance optimization is critically important. \\
+In addition, Blender only offer a Python API. \\
+All benchmarks showed are based on standard Python implementation CPython.
 
 \section{Python scientific stack}
 \begin{itemize}
 	\item \textbf{pandas} is a package for data analysis.
 	\item \textbf{scipy} offers many mathematical routines.
-	\item \textbf{numpy} is a data structure library with vectorized operations. %talk about vectorization
+	\item \textbf{numpy} is a data structure library with vectorized operations. % TODO talk about vectorization
 	\item \textbf{matplotlib} is the most used python plotting library.
 \end{itemize}
 
@@ -20,12 +20,11 @@ The used python implementation is the standard CPython. \\
 
 Project initially started with numpy-quaternion \cite{numpy-quaternion} but then moved to pyquaternion \cite{pyquaternion} because of the following reason:
 \begin{itemize}
-\item \textbf{moble/quaternion} doesn't work on Windows, as stated in the readme
-\item \textbf{pyquaternion} has a better documentation
-\item \textbf{pyquaternion} has more high-level methods
+\item \textbf{moble/quaternion} didn't work on Windows \footnote{ as per commit 03d627af0c1b2e113448ce417ecfc5ae9d2e05ba the library works on Windows but it was fixed too late for this work}, as stated in the readme. This was a blocking issue because the 3D artist of the group was using a Windows workstation.
+\item \textbf{pyquaternion} has a better documentation and more high-level methods
 \end{itemize}
 
-On the downside pyquaternion has performance disadvantages, as example the following code with \textbf{numpy-quaternion}
+On the downside pyquaternion has performance disadvantages. As an example the following code using \textbf{numpy-quaternion}
 \begin{changemargin}{-1cm}{-1cm}
 \begin{lstlisting}[language=Python,frame=single]
 from numpy_quaternion import quaternion as Quaternion
@@ -35,7 +34,7 @@ quaternions = np.array(
 \end{lstlisting}
 \end{changemargin}
 runs in 0.665 milliseconds \\
-while the following code with \textbf{pyquaternion} 
+while the following code using \textbf{pyquaternion} 
 \begin{changemargin}{-1cm}{-1cm}
 \begin{lstlisting}[language=Python,frame=single]
 from pyquaternion import Quaternion
@@ -44,5 +43,4 @@ quaternions = np.array(
 )
 \end{lstlisting}
 \end{changemargin}
-runs in 24.6 milliseconds \\
-both with an array of 100 records
+runs in 24.6 milliseconds, both with an array of 100 records

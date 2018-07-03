@@ -2,31 +2,32 @@
 \chapter{Introduction}
 \label{chap:intro}
 
-\textbf{Vehicle dynamics reconstruction} is a topic with much interest especially in insurance makers. A car crash can be recreated visually after the event happened. But there are other topics with interest in vehicle dynamics reconstruction, like self-driving vehicles or everything interested in knowing the vehicle position at some point in time. \\
-This thesis will analyze techniques for reconstruction based on inertial and GNSS data used in a related software project. \\
-In the data collected and used for the project:
+\textbf{Vehicle dynamics reconstruction} is a topic with much interest for automotive companies, car manufacturers and especially in insurance makers.
+Being able to analyze car behavior in real time can give an enforced picture about driving style, road assessment, car occupancy and so on. Besides, the case of very important events, like a car crash, to have a clear picture of the dynamics prior to the accident can help determine responsibilities and liabilities.
+With the tool i will describe in this thesis, dynamics of a car can be represented visually using data coming from a vehicle black box.
+This thesis will in fact analyze techniques for dynamic reconstruction based on inertial and GNSS data used in a related software project. \\
+The data collected and used for the project can be distinguished in these classes:
 \begin{itemize}
 \item \textbf{inertial} data was created by accelerometers and gyroscopes, which measures respectively linear accelerations and angular velocities in a local reference frame. 
-\item \textbf{GNSS} (Global Navigation Satellite System) was created by an eletronic receiver. GNSS receivers provide latitudes, longitudes and alititudes. One of the most famous GNSS is the american GPS (Global Positioning System) but during experiments also russian GLONASS and chinese BeiDou signals were received. 
+\item \textbf{GNSS} (Global Navigation Satellite System) was created by an electronic receiver. GNSS receivers provide latitudes, longitudes and altitudes. One of the most famous GNSS is the American GPS (Global Positioning System) but during experiments also Russian GLONASS and Chinese BeiDou signals were received. 
 \end{itemize}
-All these sensors can be bundled in a box, as in our case, and fitted on a vehicle. \\
-
+All these sensors can be bundled in a box, as in our case, and fitted on a vehicle. This box transmits data to a remote server using conventional cellular networks. 
 
 \begin{figure}[H]
 \includegraphics[width=\linewidth]{box.jpg}
 \caption{One of the sensor box used to collect data}
 \end{figure}
 
-\begin{flushleft}
-
-The experiment will consist of verifying the possibility of creating a software capable of recreating a vehicle dynamic visually realistic.
-The validation of results will be, in a first initial phase where effectiveness of the program will be low, exclusively visually empiric, because of the need of rapid development and testing times. In a second and later phase, when quality of output will become more difficult to evaluate empirically, result will be compared to picture and video footage captured in the data acquisition phase. \\
-
-Challenges the aspiring software solution may face are: sensor data gathering and transmission, correction of bad alignment of sensors, integration numerical error, precision reinforcement with multiple sensor fusion, representation of reconstructed trajectory. \\
-
-Input date format is specified in a Physycom Github oline repository available in \href{https://github.com/physycom/file_format_specifications/blob/master/formati_file.md}{this url}. I searched for an universal standard file format for inertial and GSSS data but i didn't find previous works. \\
-Briefly formats supported by the software are all the following combination:
-\end{flushleft}
+\justify
+The experimental work will consist of verifying the possibility of creating a software capable of recreating a vehicle dynamic visually realistic.
+The validation of results will be, in a first initial phase where effectiveness of the program will be low, exclusively visually empiric, because of the need of rapid development and testing times. In a second and later phase, when quality of output will become more difficult to evaluate empirically, results will be compared to pictures and video footages captured in the data acquisition phases. \\
+\\
+Aspiring software solution may face some challenges: sensor data gathering and transmission, correction of bad alignment, integration numerical error, precision reinforcement with multiple sensor fusion, representation of reconstructed trajectory. \\
+\\
+Input date format is specified in a Physycom(PHYsics of COMplex SYstem) group's Github online repository \footnote{\url{https://github.com/physycom/file_format_specifications/blob/master/formati_file.md}}. \\
+I searched for an universal standard file format for inertial and GNSS data but I didn't find previous work. \\
+\\	
+Briefly formats supported by the software are all the following combinations:
 
 \begin{center}
 \begin{table}[H]
@@ -40,13 +41,12 @@ Briefly formats supported by the software are all the following combination:
 
 \end{center}
 
-
-\begin{flushleft}
-\textit{full-inertial} format is the more complete, it contains both accelerometer, gyroscope and GNSS data. Indeed, the program will give a better output when provided with a \textit{full-inertial} input file, as it have more data to improve reconstruction. 
-Records data can be interpolated, in this case records have always data from all sensors, instead of only from inertial sensor or GNSS sensor, as they have different frequencies. \\
+\justify
+The \textit{full-inertial} format is the more complete one, containing both accelerometer, gyroscope and GNSS data. Indeed, the program will give a better output when provided with a \textit{full-inertial} input file, as it has more data to improve reconstruction. 
+Records can be interpolated, in this case have always data from all sensors, instead of only from one of them, as they can have different frequencies. \\
 In the case input data isn't interpolated, the software will take care of doing it. \\
-
-The following table shows \textit{full-inertial} data format in the order is present in the input files.
+\\
+The following table shows \textit{full-inertial} data format in the order in which it is presented in the input files.
 
 \begin{table}[H]
 \begin{tabular}{|c|c|c|c|c|}
@@ -69,6 +69,6 @@ The following table shows \textit{full-inertial} data format in the order is pre
 \end{tabular}
 \end{table}
 
-Lastly, I decided to visualize the reconstructed trajectory animated on the 3D modeling software Blender. The decision is motivated by the fact that Blender is a popular open source software and have an API to interact with, additionally it's already used inside the research group and one of its member is a 3d-artist specialized on it.
+\justify
+Lastly, I decided to visualize the reconstructed trajectory animated on the 3D modeling software Blender. The decision is motivated by the fact that Blender is a popular open source software and has an API to interact with. Additionally, it's already used inside the research group and one of its member is a 3D-artist specialized on it.
 %TODO talk abot blender popularity with google trends as source?
-\end{flushleft}

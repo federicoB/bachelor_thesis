@@ -2,14 +2,14 @@
 \chapter{Mathematical background}
 \label{chap:math_background}
 
-\initial{I}n this chapter I will introduce some mathematical and physics notion used in the project.
-The first part of the chapter deals with numerical integration, a tecnique used to computationally calculate the integral of physics quantities like acceleration and velocity to get the trajectory traveled by the vehicle.
-The second part deals with quaternion, a number system useful to handle rotations in tridimensional space more efficient and numerically more stable than rotation matrices.
-
+In this chapter I will introduce some mathematical and physics notion used in the project.
+The first part of the chapter deals with numerical integration, a technique used to computationally calculate the integral of physics quantities like acceleration and velocity to get the trajectory traveled by the vehicle.
+The second part deals with quaternion, a number system useful to handle rotations in tridimensional spaces, more efficient when dealing with multiple composition of rotations than rotation matrices.
+\\
 \section{Numerical integration}
-Records in input dataset may not be equaly spaced, which means that if $t_i$ is some timestamp of record in position $i$, $\exists k, t_{k}-t_{k-1}\neq t_{k+1}-t_k$. \\
+Records in input dataset may not be equally spaced, which means that if $t_i$ is some timestamp of record in position $i$, $\exists k, t_{k}-t_{k-1}\neq t_{k+1}-t_k$. \\
 This implies that I can't use Simpson integration method, because it's a Newton-Cotes quadrature rule and it assumes that data points are equally spaced.  \\
-I used a similar approch, always interpolating a second grade polynomial, but for \textbf{irreqularly spaced data.} \cite{integrating-irregularly} \\
+I used a similar approach, always interpolating a second grade polynomial, but for \textbf{irregularly spaced data.} \cite{integrating-irregularly} \\
 Considering the consecutive points $(t_1,y_1),(t_2,y_2),(t_3,y_3)$
 
 $$y=ax^2+bx+c$$
@@ -44,22 +44,22 @@ $$= \frac{a}{3}(t_3-t_1)^3+\frac{b}{2}(t_3-t_1)^2+c(t_3-t_1)$$
 
 \section{Quaternions}
 Quaternions are an extension of complex numbers usually represented in the form:
-$$ a + xi + yj + wk $$
-where $a, x, y, w$ are real numbers and $i, j, k$ are called \textit{quaternion units} \\
-with the property ${ijk=-1}$  \\
-$a$ is also called \textit{scalar} or \textit{real} part of the quaternion, while $x,y,w$ is the tridimensional \textit{vector} or \textit{imaginary} part. \cite{amslaurea6701} \\
+$$ q = a + xi + yj + wk $$
+where $a, x, y, w$ are real numbers and $i, j, k$ are called \textit{quaternion units}. \\
+with the property ${(ijk)=-1}$  \\
+$a$ is called \textit{scalar} or \textit{real} part of the quaternion, while $x,y,w$ is the tridimensional \textit{vector} or \textit{imaginary} part. \cite{amslaurea6701} \\
 Quaternions have been formalized by the Irish mathematician William Hamilton in 1843. \\
 If the scalar part is equal to zero then the quaternion is called \textit{pure}.
 
 \subsection{Vector rotations with quaternions}
-Given a point $\boldsymbol{v} \in \mathbb{R}^3$ its rotation around versor $\boldsymbol{x}=\{a_x, a_y, a_z\}$ by an angle $\theta$ can be obtained in the following way:
+Given a point $\boldsymbol{v} \in \mathbb{R}^3$, its rotation around versor $\boldsymbol{x}=\{a_x, a_y, a_z\}$ by an angle $\theta$ can be obtained in the following way:
 $$ p' = q p \overline{q}$$
 where: \\
 \begin{itemize}
 \item $p$ is a pure quaternion with the vector part equal to $\boldsymbol{v}$
-\item $q$ is a quaternion representing rotation $q=e^{\frac{\theta}{2}(a_x i + a_y j + a_z k)}=\cos(\frac{\theta}{2})+(a_x i + a_y j + a_z k)\sin(\frac{\theta}{2})$ 
+\item $q$ is a quaternion representing rotation $q=e^{\frac{\theta}{2}\left(a_x i + a_y j + a_z k\right)}=\cos\left(\frac{\theta}{2}\right)+(a_x i + a_y j + a_z k)\sin\left(\frac{\theta}{2}\right)$ 
 \item $\overline{q}$ is the conjugation of quaternion $q$ definied as \\
-$\overline{q}=(s,-\boldsymbol{v})=s-xi-yj-wk=e^{-\frac{\theta}{2}(a_x i + a_y j + a_z k)}=\cos(\frac{\theta}{2})-(a_x i + a_y j + a_z k)\sin(\frac{\theta}{2})$
+$\overline{q}=(s,-\boldsymbol{v})=s-xi-yj-wk=e^{-\frac{\theta}{2}\left(a_x i + a_y j + a_z k\right)}=\cos \left(\frac{\theta}{2}\right)-(a_x i + a_y j + a_z k)\sin \left(\frac{\theta}{2}\right)$
 \item $p'$ is a pure quaternion with its vector part equal to vector $\boldsymbol{v}$ rotated
 \end{itemize}
 
@@ -67,34 +67,37 @@ $\overline{q}=(s,-\boldsymbol{v})=s-xi-yj-wk=e^{-\frac{\theta}{2}(a_x i + a_y j 
 Given two quaternion $q_1$ and $q_2$ defined as: \\
 $q_1 = (s_1,\boldsymbol{v_1})=s_1+a_1i+b_1j+c_1k$ \\
 $q_2=(s_2,\boldsymbol{v_2})=s_2+a_2i+b_2j+c_2k$ \\
-their product can be defined as: \\
+then their product can be defined as: \\
 $q_1 q_2 = (s_1 s_2 - \boldsymbol{v_1 \cdot v_2}, \ s_1 \boldsymbol{v_2} + s_2 \boldsymbol{v_1} + \boldsymbol{v_1} \times \boldsymbol{v_2})$
 
 \subsection{Quaternion product isn't commutative}
-$q_1 q_2 \neq q_2 q_1$  \\
-is equivalent to \\
-$(s_1 s_2 - \boldsymbol{v_1 \cdot v_2}, \ s_1 \boldsymbol{v_2} + s_2 \boldsymbol{v_1} + \boldsymbol{v_1} \times \boldsymbol{v_2}) \neq $
-$(s_1 s_2 - \boldsymbol{v_1 \cdot v_2}, \ s_1 \boldsymbol{v_2} + s_2 \boldsymbol{v_1} + - (\boldsymbol{v_1} \times \boldsymbol{v_2}))$ \\
+$$q_1 q_2 \neq q_2 q_1$$ 
+\centering
+is equivalent to
+$$(s_1 s_2 - \boldsymbol{v_1 \cdot v_2}, \ s_1 \boldsymbol{v_2} + s_2 \boldsymbol{v_1} + \boldsymbol{v_1} \times \boldsymbol{v_2})$$
+$$ \neq $$
+$$(s_1 s_2 - \boldsymbol{v_1 \cdot v_2}, \ s_1 \boldsymbol{v_2} + s_2 \boldsymbol{v_1} + - (\boldsymbol{v_1} \times \boldsymbol{v_2}))$$ 
+\justify
 by the anticommutative property of vector product \cite{amslaurea6701} \\
-$$ \boldsymbol{a} \times \boldsymbol{b} = - (\boldsymbol{b} \times \boldsymbol{a}) $$ 
+$ \boldsymbol{a} \times \boldsymbol{b} = - (\boldsymbol{b} \times \boldsymbol{a}) $
 
 \subsection{Comparison with rotation matrices}
-Matrices can also be used to perform rotation. \cite{Eberly2016RotationRA} given a vector $\boldsymbol{v}$, a rotation angle $\theta$ and a versor $\boldsymbol{x}=\{a_x, a_y, a_z\}$  \\
+Matrices can be used to perform rotation. \cite{Eberly2016RotationRA} 
+%given a vector $\boldsymbol{v}$, a rotation angle $\theta$ and a versor $\boldsymbol{x}=\{a_x, a_y, a_z\}$  \\
 % Optional TODO: show how to get a matrix from axis angle and how to make rotations} 
-A quaternion can be associated with a rotation matrix and and vice versa. \cite{amslaurea6701,Eberly2016RotationRA} \\
-Aside from memory usage, where quaternions are more efficient, the time complexity must take account conversion from rotation system, as from axis-angle in our case, and actual context of usage as explained in the following.  \\
-Performance can be evaluated at high-level by counting the numer of operations needed to perform conversion and rotations. operations like additions or subtractions, multiplications, divisions and trigonometric function evaluations like sines and cosines. \\
-In the following analysis I will leave out performance optimization that computer systems can apply in some situations. Just looking at number of operations should give a general idea of difference between rotation representations. \\
+A quaternion can be associated with a rotation matrix and vice versa. \cite{amslaurea6701} \\
+Aside from memory usage, where quaternions are more efficient, the time complexity must take into account the conversion between rotation representations, as from axis-angle in our case, and actual context of usage as explained in the following.  \\
+Performance can be evaluated at a high-level by counting the number of operations needed to perform conversions and rotations. Operations like additions or subtractions, multiplications, divisions and trigonometric function like sines and cosines. \\
+In the following analysis I will leave out performance optimization that computer systems can apply in some situations, like for example the simultaneous calculations of sine and cosine performed by modern machine. Just looking at number of operations should give a general idea of difference between rotation representations. \\
 Axis-angle to matrix conversion requires 13 additions, 15 multiplications and 2 trigonometric calls. \\
 Axis-angle to quaternion conversion requires 4 multiplications and 2 trigonometric calls. \\
 Rotating a vector using a rotation matrix requires 5 additions and 9 multiplications. \\
-Rotating a vector using a quaternion, optimizing using the fact that scalar part is to zero, requires 17 additions and and 24 multiplications. \\
+Rotating a vector using a quaternion, optimizing considering its scalar part zero, requires 17 additions and and 24 multiplications. \\
 % add table?
-So it results that rotation matrix are more efficient in rotating a vector. \\
-The real advantage of quaternion are rotation composition. 
-Indeed, composing two quaternion require only 12 additions and 16 multiplications while matrices 18 additions and 27 multiplications. \\
-What follows in a comparison analysis of the number of operations required to rotate $n$ vectors by a cumulative $n$ angles represented as axis-angle notation.
-Those abbrevesion are used: A: Additions / subtractions, M : Multiplications / Divisions, F: trigonometric Functions
+So it results that rotation matrix are more efficient in rotating a vector, but the real advantage of quaternions are rotation compositions. 
+Indeed, composing two quaternions require only 12 additions and 16 multiplications while matrices, would have required 18 additions and 27 multiplications. \\
+What follows is a comparison analysis of the number of operations required to rotate $n$ vectors by a cumulative $n$ angles represented as axis-angle notation.
+Those abbreviations are used: $A$: Additions / subtractions, $M$ : Multiplications, $F$: trigonometric Functions
 %TODO convert to table?
 \begin{itemize}
 \item rotation matrices: ${((13A + 15M + 2F) + (5A + 9M) + (18A + 27M))n} = {(36A + 51M + 2F)n}$
