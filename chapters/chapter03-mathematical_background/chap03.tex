@@ -7,15 +7,43 @@ The first part of the chapter deals with numerical integration, a technique used
 The second part deals with quaternion, a number system useful to handle rotations in tridimensional spaces, more efficient when dealing with multiple composition of rotations than rotation matrices.
 \\
 \section{Numerical integration}
-Records in input dataset may not be equally spaced, which means that if $t_i$ is some timestamp of record in position $i$, $\exists k, t_{k}-t_{k-1}\neq t_{k+1}-t_k$. \\
-This implies that I can't use Simpson integration method, because it's a Newton-Cotes quadrature rule and it assumes that data points are equally spaced.  \\
+Records in input dataset may not be equally spaced, which means that if $t_i$ is some timestamp of a record in position $i$, then $\exists k, t_{k}-t_{k-1}\neq t_{k+1}-t_k$. \\
+This implies that I can't use Simpson integration method, because it's a Newton-Cotes quadrature rule and it assumes that data points are equally spaced. \cite{casciola} \\
 I used a similar approach, always interpolating a second grade polynomial, but for \textbf{irregularly spaced data.} \cite{integrating-irregularly} \\
 Considering the consecutive points $(t_1,y_1),(t_2,y_2),(t_3,y_3)$
-
+the polynomial in the form
 $$y=ax^2+bx+c$$
-
+Consider a finite space of real functions and a its base of representation $\phi_0,\phi_1,...,\phi_n$.
+Each function of the space can be defined as a linear combination of the basis:
 $$ \phi(x) = \sum_{i=0}^n a_i \phi (x)$$ 
-
+Consider the canonic form where the basis are monomial $\phi_i=x^i$ $\forall_{i=0}^n$ \\
+Indeed, every polynomial can be represented as a linear combination of monomials. \\
+What follows is a linear equation system that require polynomial passes through the points $(t_i,y_i)$.
+$$
+\begin{cases}
+at_1^2 + bt_1 + c = y_1 \\
+at_2^2 + bt_2 + c = y_2 \\
+at_3^2 + bt_3 + c = y_3 \\
+\end{cases}
+$$
+$$ 
+\begin{pmatrix}
+a \\
+b \\
+c \\
+\end{pmatrix}
+\begin{pmatrix}
+t_1^2 & t_1 & 1 \\
+t_2^2 & t_2 & 1 \\
+t_3^2 & t_3 & 1 \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+y_1 \\
+y_2 \\
+y_3 \\
+\end{pmatrix}
+$$
 $$ 
 \begin{pmatrix}
 a \\
@@ -34,14 +62,12 @@ y_2 \\
 y_3 \\
 \end{pmatrix}
 $$
-
+Once found $a,b,c$ the integral of the parabola defined can be calculated as:
 $$
 \int_{t_1}^{t_3} y(x)dx = \int_{t_1}^{t_3} ax^2 + by + c dx = [\frac{a}{3}x^3+\frac{b}{2}x^2+c{x}]_{t_1}^{t_3} 
 $$
 $$= \frac{a}{3}(t_3-t_1)^3+\frac{b}{2}(t_3-t_1)^2+c(t_3-t_1)$$
-
-
-
+Unlike classic Simpson method, this allows to calculate also only half of the area bounded by the parabola, simply evaluate integral $\int_{t_1}^{t_2} y(x)dx$ instead of $\int_{t_1}^{t_3} y(x)dx $
 \section{Quaternions}
 Quaternions are an extension of complex numbers usually represented in the form:
 $$ q = a + xi + yj + wk $$
