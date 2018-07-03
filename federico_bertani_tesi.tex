@@ -149,9 +149,8 @@
 \usepackage{verbatim}					%Permits pre-formated text insertion
 \usepackage{upgreek }					%Calls other kind of greek alphabet
 \usepackage{latexsym}					%Extra symbols
-\usepackage[square,numbers,
-		     sort&compress]{natbib}		%Calls bibliography commands 
-\usepackage{url}						%Supports url commands
+\usepackage[style=numeric,maxnames=50]{biblatex}
+\usepackage{url}{{}}						%Supports url commands
 % \usepackage{etex}						%eTeXÕs extended support for counters
 % \usepackage{fixltx2e}					%Eliminates some in felicities of the 
 									%original LaTeX kernel
@@ -307,6 +306,9 @@
 \setlength{\parsep}{\parskip}%
 }%
 \item[]}{\end{list}}
+
+\bibliography{federico_bertani_tesi}
+
 %
 %
 \begin{document}
@@ -395,10 +397,9 @@ Please visit \href{https://github.com/federicoB/bachelor_thesis}{this webpage} t
 % Apparently the guidelines don't say anything about citations or
 % bibliography styles so I guess we can use anything.
 \backmatter
-\bibliographystyle{siam}
+%\bibliographystyle{siam}
 \refstepcounter{chapter}
-\bibliography{federico_bertani_tesi}
-
+\printbibliography
 %
 % Add index
 %\printindex

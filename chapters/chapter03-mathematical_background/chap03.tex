@@ -7,6 +7,40 @@ The first part of the chapter deals with numerical integration, a tecnique used 
 The second part deals with quaternion, a number system useful to handle rotations in tridimensional space more efficient and numerically more stable than rotation matrices.
 
 \section{Numerical integration}
+Records in input dataset may not be equaly spaced, which means that if $t_i$ is some timestamp of record in position $i$, $\exists k, t_{k}-t_{k-1}\neq t_{k+1}-t_k$. \\
+This implies that I can't use Simpson integration method, because it's a Newton-Cotes quadrature rule and it assumes that data points are equally spaced.  \\
+I used a similar approch, always interpolating a second grade polynomial, but for \textbf{irreqularly spaced data.} \cite{integrating-irregularly} \\
+Considering the consecutive points $(t_1,y_1),(t_2,y_2),(t_3,y_3)$
+
+$$y=ax^2+bx+c$$
+
+$$ \phi(x) = \sum_{i=0}^n a_i \phi (x)$$ 
+
+$$ 
+\begin{pmatrix}
+a \\
+b \\
+c \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+t_1^2 & t_1 & 1 \\
+t_2^2 & t_2 & 1 \\
+t_3^2 & t_3 & 1 \\
+\end{pmatrix}^{-1}
+\begin{pmatrix}
+y_1 \\
+y_2 \\
+y_3 \\
+\end{pmatrix}
+$$
+
+$$
+\int_{t_1}^{t_3} y(x)dx = \int_{t_1}^{t_3} ax^2 + by + c dx = [\frac{a}{3}x^3+\frac{b}{2}x^2+c{x}]_{t_1}^{t_3} 
+$$
+$$= \frac{a}{3}(t_3-t_1)^3+\frac{b}{2}(t_3-t_1)^2+c(t_3-t_1)$$
+
+
 
 \section{Quaternions}
 Quaternions are an extension of complex numbers usually represented in the form:
