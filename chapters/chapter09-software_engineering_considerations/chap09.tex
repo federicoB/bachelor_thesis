@@ -2,12 +2,57 @@
 \chapter{Software engineering consideration}
 \label{chap:software_engineering_consideration}
 
-% talk about testing and about multiple increaing tests that i created wor veryfinging increasing functionalities.
-% esameple spring trajectory test (only integrator) and circular trajectory test (integrator and rotator)
-% if integrator are bad implemented both tests fails, if only rotator is bad implemented then only second test fails
+This chapters deals with software engineering (SWE) topics: software design, quality measure and process management. \\
+The SWE course i followed was focused on object oriented software design, that doesn't really fit for this project. The domain doesn't contain much objects to model and python classes introduce an overhead which is incompatible with performance required, taking into account input dimension. \\
+Anyway, even if I used a more functional approach, I still divided the codebase in modules using \textit{responsibility-driven design}.
+
+\section{Requirements}
+After talking to my supervisor I modeled the following functional requirements:
+\begin{enumerate}
+\item The software will support inputs in the format specified in the \hyperref[chap:intro]{introduction chapter}
+\item The software will use Blender API to animate a vehicle so that its linear and angular position reflects the one from which the input data is measured.
+\end{enumerate}
+Non functional requirements are:
+\begin{enumerate} 
+\item \underline{performance}: the software must at least elaborate a dataset of 100.000 records in less than five minutes
+\item \underline{user experience}: the software must be easy to use
+\item the software must support of Windows and GNU/Linux \underline{operating systems}
+\end{enumerate}
 
 \section{Structure}
+Satisfying functional requirement 1 is the main challenge of the project. Recreating a perfect reconstruction is very hard and requires techniques as showed in the previous chapter. \\
+Following the methods previously illustrated the \textit{responsibilities} of the software are:
+\begin{enumerate}
+\item input loading
+\item input parsing
+\item input format auto-detection
+\item noise reduction
+\item gyroscope offset drift reduction
+\item correction of vertical bad alignment
+\item correction of vertical bad alignment
+\item derivation of GNSS speed and acceleration
+\item moving from local to laboratory reference frame
+\item moving from laboratory to world reference frame
+\item integrate accelerations
+\item integrate velocities
+\item timestamps normalization
+\item dependencies auto-installation
+\item blender user-interface handling
+\item creation of animation in Blender
+\end{enumerate}
 
-\section{Dependency managment}
+\section{Dependency management}
+Current software development practices suggest to \textit{don't reinvent the wheel} and re-use as much as software as possible.
+Project stability is related to its dependencies stability. Delegating responsibilities to others trusted programmers reduce project risk and increase overall quality. Specifying explicitly project dependencies is useful both for the programmer and for the user, in particular specifying what versions of dependencies the software is assured to works. Python has various tools to handle this, the most popular are \textit{pip}, \textit{virtualenv} and \textit{Conda}. \\
+\textit{Virtual environments} allows to isolate python packages on which the project depends from the global system ones. This allows to use different packages version also than create a file that list them. \\
+\textit{Pip} (Pip Install Packages) can install packages from a online repository PyPi, the largest one containing more than 143 hundred packages. \\
+\textit{Conda} is a package manager designed for every language, instead virtualenv is only for Python. It was created from the PyData community to overcome Pip limitations and doesn't use only PyPi to retrieve packages. Instead it has customized version of python scientific packages like numpy, scipy and pandas, optimized for performance as Conda can work on a more low-level in target machine. \\
+Initially i was using Conda and I noticed a better performance but when i create the Blender add-on code part that auto install dependencies i moved back to virtualenv+pip because it was easier to install.
+% TODO talk about difference i found respect to virtualenv+pip and put some references
 
-% pip and conda
+\section{Unit testing}
+On the project I applied the principles of \textit{unit testing}. I tried to create a test for every function I've written, sometimes even before having wrote the code to test, to make it minimal. \\
+I solved the problem of having a ground truth to test against, because I didn't have much more than the input dataset of real world events, by creating synthetic analytical trajectories. \\
+The test I've written are incremental, some test verify only small functionalities, other tests verify more overall features that use the small functionalities underneath. For example, I've created a test with a complex trajectory similar to the one of a spring to test integrator precision, then I've created a circular trajectory where body also rotate like a car in a roundabout to test integrator precision, angular position integration and body rotation.
+In this way, is easier when a breaking change is introduced to debug and fix the problem.\\
+Right now the test coverage, the percentage of code lines that are executed by automatic tests, of project's principal modules is 86\%. \\ 
