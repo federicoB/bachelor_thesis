@@ -3,17 +3,17 @@
 \label{chap:programming_language_library_choices}
 
 \section{Python}
-For this project, the Python programming language was choosen. \cite{python-website} \\
+For this project, the Python programming language was chosen. \cite{python-website} \\
 Python is increasingly being used by the scientific community for its large collection of packages. It allows to link normal Python code to C / C++ extension when performance optimization is critically important. \\
 In addition, Blender only offer a Python API. \\
 All benchmarks showed are based on standard Python implementation CPython.
 
 \section{Python scientific stack}
 \begin{itemize}
-	\item \textbf{pandas} is a package for data analysis.
-	\item \textbf{scipy} offers many mathematical routines.
-	\item \textbf{numpy} is a data structure library with vectorized operations. % TODO talk about vectorization
-	\item \textbf{matplotlib} is the most used python plotting library.
+	\item \textbf{Numpy} is a data structure library for n-dimensional arrays. Instead of creating an object for each integer like vanilla Python with related garbage collector overhead, it handles array in contiguous memory space like C. Another big performance advantage are vectorized operations, that permits to modify multiple array elements with a syntax like they were a single value. For example, if \texttt{arr} is an array of $n$ elements, for multiplying each element for the constant 3, one doesn't need to use a cycle that iterate on array, but just write \texttt{arr * 3}. This is not just syntactic sugar, but offer to the interpreter additional information, like that the operation would be on all elements without interruption from side effects, implying a performance improvements because of optimized cache usage.
+	\item \textbf{Pandas} is a package for data analysis. Its main data type is called \texttt{DataFrame} and represents two-dimensional dataset. A \texttt{Dataframe} can be easily created from a \texttt{csv} file, then on \texttt{Dataframe} object one call call various methods. It is possible to complete a project like this only with pandas, as it uses numpy underneath, but it offers a very expressive interface that needs a lot of logic beneath with a related overhead. For this reason i reduced the Pandas usage and called it only when implements without it was really tedious.
+	\item \textbf{Scipy} offers many mathematical routines on numpy arrays. I used mainly trigonometric functions like arctangent, cosine and sine. It have big precision constant for example for Pi and vectorized routines from cross and dot product.
+	\item \textbf{Matplotlib} is the most used python plotting library, most of the others plotting library are based on it trying to abstract and elevate it's complex interface. Nevertheless one can create very appealing charts also with low-level Matplotlib methods, especially it offers full customization.
 \end{itemize}
 
 \section{Quaternion libraries}
