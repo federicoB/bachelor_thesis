@@ -12,6 +12,7 @@ One solution can be to use non-directional speed from GNSS data by the measure d
 \includegraphics[width=\textwidth]{gnss_error_stationary_vehicle}
 \caption{Green points represent GNSS positions. On top-left GNSS error can be noticed in a situation where vehicle was stopped during experiment}
 \end{figure}
+\justify
 To try to handle input data where vehicle never really stops, the algorithm for stationary time detection searches into dataset with an increasing threshold, until enough periods are found.
 
 \section{Gyroscope drift}
@@ -38,13 +39,14 @@ Box vertical unalignment is corrected by looking at gravitational acceleration o
 \includegraphics[width=\textwidth]{kia_bad_z_align.jpg}
 \caption{Axes shows a sensor bad vertical alignment}
 \end{figure}
-
+\justify
 Once obtained the rotation angle, the program rotates both local acceleration and angular velocities. After having done that, if in a following stationary time a bad vertical alignment is still found, the program prints a warning on the console to notify that the box become misaligned during motion.
 
 \section{Correction of horizontal alignment}
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{kia_bad_xy_align.jpg}
 \end{figure}
+\justify
 Box horizontal unalignment is corrected by looking for situations where $a_x>0, \ a_y>0, \omega_z =0$. If this state exists, then or the car is sliding on ice or there is an unalignment on the $xy$ plane. Where, for example, an acceleration forward will be measured with both positive accelerations along x and y axis. 
 Still in the situation described, the misalignment can be measured and corrected, still by rotating both local accelerations and angular velocities.
 
