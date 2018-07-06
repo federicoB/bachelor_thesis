@@ -2,16 +2,19 @@
 \chapter{Conclusions}
 \label{chap:conclusions}
 
-The thesis presented a software to reconstruct vehicle dynamics from inertial and GNSS data.
-I integrated physics quantities with a technique suitable for not equally spaced records. Both acceleration and angular velocity are integrated and angular position is composed gradually using quaternion performance advantage.
+Thus thesis presented a software to reconstruct vehicle dynamics from inertial and GNSS data.
+I developed an algorithm to integrate physical quantities with a technique suitable also for not equally time separated records. Both acceleration and angular velocity are integrated; angular position is composed using quaternion performance advantages.
 Trajectory obtained from accelerometer and gyroscope is improved additionally by GNSS data, leading to a more precise and smooth path.
-The project has been implemented in Python, mainly exploiting Numpy as Pyquaternion libraries functionalities.
-I created a standalone Blender add-on which auto-installs its dependencies and offers a graphical interface. Much of the code has been proved with automated testing.
+The project has been implemented in Python, mainly take advantage of Numpy and Pyquaternion libraries functionalities.
+I created a standalone Blender add-on which auto-installs its dependencies and offers a graphical interface. Most of the code has been checked with automated testing.
 
 \section{Future Development}
-% Better error reduction
-% approximation instead on interpolation for GNSS positions
-% multiple black box fusion
-% Horizontal angular position correction with heading
-% Change basis of interpolation, reduce error and speed up
-% Parallelize
+Several improvement can be done:
+\begin{itemize}
+\item angular position isn't corrected and with time tends to diverge due to numerical error, one can use GNSS data to correct horizontal orientation, $\theta_x$ and $\theta_y$ can be reset to zero if we detect the car is one plain surface. Online maps API can be used to have an approximation of road slope.
+\item gyroscope offset drift can be additionally removed with using temperature sensor
+\item vertical position can be detected using barometer
+\item data from multiple boxes mounted on the same vehicle can be merged, once know the relative position
+\item using approximation instead of interpolation for GNSS position determination, for reduce error when vehicle is stationary
+\item change basis of second grade polynomial used in integration, for improve stability
+\item parallelize execution, expecially in delta integration routine where it can be distributed on $n$ cores.

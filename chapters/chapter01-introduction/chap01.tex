@@ -6,6 +6,10 @@
 Being able to analyze car behavior in real time can give an enforced picture about driving style, road assessment, car occupancy and so on. Besides, the case of very important events, like a car crash, to have a clear picture of the dynamics prior to the accident can help determine responsibilities and liabilities.
 With the tool i will describe in this thesis, dynamics of a car can be represented visually using data coming from a vehicle black box.
 This thesis will in fact analyze techniques for dynamic reconstruction based on inertial and GNSS data used in a related software project. \\
+The Physics of the City Laboratory inside the Physics of Complex Systems Group has been involved for years in the development of solutions related to human mobility, based both on pedestrian and means of transport. For this reason, collaborations have been opened with numerous Italian companies: in the insurance business (for example Unipol Gruppo S.p.A.), in the telematics branch (for example Octo Telematics Ltd), and in the industrial branch (for example Meta System S.p.A. and TEXA S.p.A.). From these collaborations, various activities were born: inertial sensors development and validation, product integration for the creation of ``black boxes'' for cars and study of techniques for the validation of collected data and reconstruction of the dynamics through the recorded data itself. \\
+My thesis work has been inserted in the activities carried out by the group for these last two points. The data come in fact from prototype devices made by Meta System and collected directly on-board via a serial connection between the devices themselves and a system based on Raspberry Pi. \\
+The whole on-board processing chain, serial transmission and registration on RPi device has been validated by the group during the years of activity and has led to the development of numerous tools used indirectly in this Thesis. 
+\\
 The data collected and used for the project can be distinguished in these classes:
 \begin{itemize}
 \item \textbf{inertial} data was created by accelerometers and gyroscopes, which measures respectively linear accelerations and angular velocities in a local reference frame. 
@@ -72,16 +76,12 @@ The following table shows \textit{full-inertial} data format in the order in whi
 \justify
 I decided to visualize the reconstructed trajectory animated on the 3D modeling software Blender. The decision is motivated by the fact that Blender is a popular open source software and has an API to interact with. Additionally, it's already used inside the research group and one of its member is a 3D-artist specialized on it.
 %TODO talk abot blender popularity with google trends as source?
-
-\section{State of art}
-The Physics Laboratory of the City inside the Physics of Complex Systems group has been involved for years in the development of solutions related to human mobility, both based on pedestrian and means of transport. For this reason, collaborations have been opened with numerous Italian companies: in the insurance business (for example Unipol Gruppo S.p.A.), in the electronic branch (for example Octo Telematics Ltd), and in the industrial branch (for example Meta System SpA and TEXA SpA). From these collaborations varius activities were born: inertial sensors development and validation, product integration for the creation of "black boxes" for cars and the study of techniques for the validation of the collected data and the reconstruction of the dynamics through the recorded data. \\
-My thesis work has been inserted in the activities carried out by the group for these last two points. The data come in fact from prototype devices made by MetaSystem and collected directly on-board via a serial connection between the devices and a system based on Raspberry Pi. \\
-The whole on-board processing chain, serial transmission and registration on RPi device has been validated by the group during the years of activity and has led to the development of numerous tools used indirectly in this Thesis. 
 \\
-Road vehicle crashes reconstruction has already been a case study, with for both inertial and GNSS data, for example in the work of S.Tadic et al. \cite{7733120} \\
-None of the work I found never dealed with computational problems, neither provided a 3D visualization of the reconstruction.
-
-\section{Document structure}
-This thesis consist of 9 chapter: after this introduction, we will look to some mathematical notions necessary to comprehends techniques used in the project, then I will write about what programming language I decided to use and what libraries \\
-The characters that follows are a description of the principal code parts: error reduction, vehicle rotation, numerical integration and the Blender add-on. Then I included a part about software engineering practice i followed in developing this project. \\
-Finally a conclusion chapter, with a recap of all topics covered and description of possible future improvements.
+\justify
+Road vehicle crashes reconstruction has already been a case study, with both inertial and GNSS data, for example in the work of S. Tadic \cite{7733120}. \\
+None of the work I found ever dealed with computational problems, neither provided a 3D visualization of the reconstruction.
+\\
+\justify
+This Thesis consists of 9 chapters: after this introduction, in chapter 2 we will look to some mathematical notions necessary to comprehends techniques used in the project, then in chapter 3 I will write about what programming language I decided to use and what libraries \\
+The chapters that follow are a description of the principal code parts: error reduction, vehicle rotation, numerical integration and the Blender add-on. Then in chapter 6 I included a part about software engineering practice I followed during the development of this project. \\
+Finally, there's a conclusion chapter, with a recap of all the topics covered and a description of possible future improvements.

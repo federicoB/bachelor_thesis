@@ -7,38 +7,38 @@ During SWE course I followed was focused on object oriented software design, tha
 Anyway, even if I used a more functional approach, I still divided the codebase into modules using \textit{responsibility-driven design}.
 
 \section{Requirements}
-After several discussions with to my supervisor, I modeled the following functional requirements:
+After several discussions with my supervisor, I modeled the following functional requirements:
 \begin{enumerate}
-\item The software will support inputs in the format specified in the \hyperref[chap:intro]{introduction chapter}
-\item The software will use Blender API to animate a vehicle so that its linear and angular positions reflect the one from which the input data is measured.
+\item the software will support inputs in the format specified in the \hyperref[chap:intro]{introduction chapter};
+\item the software will use Blender API to animate a vehicle so that its linear and angular positions reflect the one from which the input data is measured;
 \end{enumerate}
 Non functional requirements are:
 \begin{enumerate} 
-\item \underline{performance}: the software must at least elaborate a dataset of 100.000 records in less than five minutes
-\item \underline{user experience}: the software must be easy to use also from a 3D artist point of view
-\item the software must support of Windows and GNU/Linux \underline{operating systems}
+\item \underline{performance}: the software must at least elaborate a dataset of 100.000 records in less than five minutes;
+\item \underline{user experience}: the software must be easy to use also from a 3D artist point of view;
+\item \underline{operating systems}. the software must support of Windows and GNU/Linux ;
 \end{enumerate}
 
 \section{Structure}
 Satisfying functional requirement 1 is the main challenge of the project. Recreating a perfect reconstruction is very hard and requires many techniques as showed in the previous chapter. \\
 Following the methods previously illustrated the \textit{responsibilities} of the software are:
 \begin{enumerate}
-\item input loading
-\item input parsing
-\item input format auto-detection
-\item noise reduction
-\item gyroscope offset drift reduction
-\item correction of vertical bad alignment
-\item correction of vertical bad alignment
-\item derivation of GNSS speed and acceleration
-\item moving from local to laboratory reference frame
-\item moving from laboratory to world reference frame
-\item integrate accelerations
-\item integrate velocities
-\item timestamps normalization
-\item dependencies auto-installation
-\item blender user-interface handling
-\item creation of animation in Blender
+\item input loading;
+\item input parsing;
+\item input format auto-detection;
+\item noise reduction;
+\item gyroscope offset drift reduction;
+\item correction of vertical bad alignment;
+\item correction of vertical bad alignment;
+\item derivation of GNSS speed and acceleration;
+\item moving from local to laboratory reference frame;
+\item moving from laboratory to world reference frame;
+\item integrate accelerations;
+\item integrate velocities;
+\item timestamps normalization;
+\item dependencies auto-installation;
+\item blender user-interface handling;
+\item creation of animation in Blender;
 \end{enumerate}
 
 \begin{figure}[H]
