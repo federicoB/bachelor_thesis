@@ -338,11 +338,11 @@
 \clearemptydoublepage
 %
 \input{frontmatter/abstract}
-\clearemptydoublepage
+\clearpage
 %
-\input{frontmatter/dedication}
-\clearemptydoublepage
+\epigraph{\textit{I'm personally convinced that computer science has a lot in common with physics. Both are about how the world works at a rather fundamental level. The difference, of course, is that while in physics you're supposed to figure out how the world is made up, in computer science you create the world. Within the confines of the computer, you're the creator. You get to ultimately control everything that happens. If you're good enough, you can be God. On a small scale.}}{Linus Torvalds}
 %
+\clearpage
 %
 \renewcommand{\contentsname}{Table of Contents}
 \maxtocdepth{subsection}
@@ -350,7 +350,7 @@
 \vfill
 \justify
 \textbf{Please visit \url{https://github.com/federicoB/bachelor_thesis} to find an update version of this document}
-\clearemptydoublepage
+\clearpage
 
 
 %
@@ -376,6 +376,8 @@
 
 \import{chapters/chapter09-conclusions/}{chap09.tex}
 
+\input{frontmatter/dedication}
+\clearpage
 %
 % Apparently the guidelines don't say anything about citations or
 % bibliography styles so I guess we can use anything.
