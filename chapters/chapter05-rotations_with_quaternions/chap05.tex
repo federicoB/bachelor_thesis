@@ -6,7 +6,11 @@ This chapter deals with on usage of quaternions for rotations and in general wit
 
 \section{From local to laboratory}
 The program calculates the change of angular positions by integrating angular velocities. The angular velocities are in a local reference frame, which means that for calculating angular position at time $t_{i+1}$ we must take in account angular position at time $t_i$: it must be gradually composed.\\
-% TODO insert image to explain cumulative rotation of vehicle
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{angle_composition.png}
+\caption{Angle composition in vehicle motion}
+\end{figure}
+\justify
 One of the first error I committed, was considering the rotation composition as the sum of angles on each axis. I was using the same integration routine used for linear dimensions that does the cumulative sum on each axis, i.e. the sum of the areas. But when composing multiple rotations, for example when having a rotation around vertical versor $\hat{z}$ by an angle $\theta_z$, besides adding $\theta_z$ to the vertical rotation, one must move rotation axis that belongs to the horizontal $xy$ plane. \\
 So I divided the integration routine in two functions, one that returns an array of areas, the second that calls the first and then does the cumulative sum of the array of areas. I've done this also for keeping compatibility for others modules that were using the previous single function. \\
 Then, once I had the angle variation vector $\langle\Delta\theta_x,\Delta\theta_y,\Delta\Theta_z\rangle$ the respective quaternion can be created and multiplied together. 
