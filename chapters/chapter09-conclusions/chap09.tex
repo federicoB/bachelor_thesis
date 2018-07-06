@@ -9,13 +9,15 @@ The project has been implemented in Python, mainly take advantage of Numpy and P
 I created a standalone Blender add-on which auto-installs its dependencies and offers a graphical interface. Most of the code has been checked with automated testing.
 
 \section{Future Development}
-Several improvement can be done:
+Several improvements can be implemented in following releases:
 \begin{itemize}
-\item angular position isn't corrected and with time tends to diverge due to numerical error, one can use GNSS data to correct horizontal orientation, $\theta_x$ and $\theta_y$ can be reset to zero if we detect the car is one plain surface. Online maps API can be used to have an approximation of road slope.
-\item gyroscope offset drift can be additionally removed with using temperature sensor
-\item vertical position can be detected using barometer
-\item data from multiple boxes mounted on the same vehicle can be merged, once know the relative position
-\item using approximation instead of interpolation for GNSS position determination, for reduce error when vehicle is stationary
-\item change basis of second grade polynomial used in integration, for improve stability
-\item parallelize execution, expecially in delta integration routine where it can be distributed on $n$ cores.
+\item the angular position reconstruction can still be improved significantly using some inference techniques (fusing data from other sensors, refining the analytical model of the dynamics) and also it tends to drift away due to numerical error. Cross-validating vehicle angular positions with accelerometer and GNSS can provide a better assessment on the error it has been accumulated and that must be corrected. Moreover, online maps API can be used to have an approximation of road slope;
+\item gyroscope offset can be additionally analyzed through unused data coming from the temperature sensor. In fact, it is well known that this erroneous behavior is strongly correlated with the sensor's thermal state;
+\item vertical positioning can be strongly improved by using barometer;
+\item data from sensors installed on different positions in the same vehicle can be merged, at the beginning using their known relative positions, and later even by self-calculating them;
+\item usage of approximation instead of interpolation for GNSS precise positioning can be used to reduce error when vehicle is in a stationary regime;
+\item to improve integration algorithm stability it is possible to explore different change of basis of second grade polynomial used;
+\item implementation of symplectic integration schemes which, due to their non-dispersive nature, can help improving the reconstruction;
+\item implementation of a new file format, based on HDF, to drastically improve I/O performances
+\item parallelize execution, expecially in delta integration routine where it can be distributed on an large number of cores.
 \end{itemize}
