@@ -17,8 +17,8 @@ To try to handle input data where vehicle never really stops, the algorithm for 
 
 \section{Gyroscope drift}
 Gyroscopes have a drift and an offset that is unavoidable. \cite{6727722} \\
-Offsets and their drift can be measured when vehicles are stationary. Average value of angular velocities in stationary moments is an approximation of gyroscope offset.
-During motion, a gyroscope exposed to heat increase its drift. So I made sure drift removal was applied continuously at each stationary time, removing the drift detected onwards. 
+Offsets and their drifts can be measured when vehicles are stationary. Average value of angular velocities in stationary moments is an approximation of gyroscope offset.
+During motion, a gyroscope exposed to heat increases its drift. So I made sure drift removal was applied continuously at each stationary time, removing the drift detected onwards. 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{gyro_drift.png}
 \caption{Data from stopped vehicle. Linear speed is near zero but gyroscope detects a non negligible angular speed}
@@ -47,6 +47,7 @@ Once obtained the rotation angle, the program rotates both local acceleration an
 \includegraphics[width=\textwidth]{kia_bad_xy_align.jpg}
 \end{figure}
 \justify
-Box horizontal unalignment is corrected by looking for situations where $a_x>0, \ a_y>0, \omega_z =0$. If this state exists, then or the car is sliding on ice or there is an unalignment on the $xy$ plane. Where, for example, an acceleration forward will be measured with both positive accelerations along x and y axis. 
+Box horizontal unalignment is corrected by looking for situations where $a_x>0, \ a_y>0, \omega_z =0$. If this state exists, then the car is sliding on ice without rotating on itself or there is an unalignment on the $xy$ plane. The latter is more likely.\\
+On unaligmnent, for example, an acceleration forward will be measured with both positive accelerations along x and y axis. 
 Still in the situation described, the misalignment can be measured and corrected, still by rotating both local accelerations and angular velocities.
 

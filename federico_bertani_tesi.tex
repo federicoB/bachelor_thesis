@@ -347,49 +347,42 @@
 \renewcommand{\contentsname}{Table of Contents}
 \maxtocdepth{subsection}
 \tableofcontents
-\addtocontents{toc}{\par\nobreak \mbox{}\hfill{\bf Page}\par\nobreak}
+\vfill
+\justify
+\textbf{Please visit \url{https://github.com/federicoB/bachelor_thesis} to find an update version of this document}
 \clearemptydoublepage
 
-Please visit \href{https://github.com/federicoB/bachelor_thesis}{this webpage} to find an update version of this document
+
 %
 % The bulk of the document is delegated to these chapter files in
 % subdirectories.
 \mainmatter
 %
-\import{chapters/chapter01/}{chap01.tex}
+\import{chapters/chapter01-introduction/}{chap01.tex}
 
-\import{chapters/chapter02-state_of_art/}{chap02.tex}
+\import{chapters/chapter02-mathematical_background/}{chap02.tex}
 
-\import{chapters/chapter03-mathematical_background/}{chap03.tex}
+\import{chapters/chapter03_language_and_libraries_choices/}{chap03.tex}
 
-\import{chapters/chapter04_language_and_libraries_choices/}{chap04.tex}
+\import{chapters/chapter04-input_data_cleaning/}{chap04.tex}
 
-\import{chapters/chapter05-input_data_cleaning/}{chap05.tex}
+\import{chapters/chapter05-rotations_with_quaternions/}{chap05.tex}
 
-\import{chapters/chapter06-rotations_with_quaternions/}{chap06.tex}
+\import{chapters/chapter06-trajectory_integration/}{chap06.tex}
 
-\import{chapters/chapter07-trajectory_integration/}{chap07.tex}
+\import{chapters/chapter07-blender_add-on/}{chap07.tex}
 
-\import{chapters/chapter08-blender_add-on/}{chap08.tex}
+\import{chapters/chapter08-software_engineering_considerations/}{chap08.tex}
 
-\import{chapters/chapter09-software_engineering_considerations/}{chap09.tex}
-
-\import{chapters/chapter10-future_development/}{chap10.tex}
-
-\import{chapters/chapter11-conclusions/}{chap11.tex}
-
-%
-%
-% And the appendix goes here
-\appendix
-\import{chapters/appendices/}{app0A.tex}
+\import{chapters/chapter09-conclusions/}{chap09.tex}
 
 %
 % Apparently the guidelines don't say anything about citations or
 % bibliography styles so I guess we can use anything.
 \backmatter
-%\bibliographystyle{siam}
+
 \refstepcounter{chapter}
+\renewcommand{\bibname}{References}
 \printbibliography
 %
 % Add index

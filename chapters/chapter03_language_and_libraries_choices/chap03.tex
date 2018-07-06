@@ -1,0 +1,46 @@
+%\let\textcircled=\pgftextcircled
+\chapter{Programming language and library choices}
+\label{chap:programming_language_library_choices}
+
+\section{Python}
+For this project, the Python programming language was chosen. \cite{python-website} \\
+Python is increasingly being used by the scientific community for its large collection of packages. It allows to link normal Python code to C / C++ extension when performance optimization is critically important. \\
+In addition, Blender only offer a Python API. \\
+All benchmarks showed are based on standard Python implementation CPython.
+
+\section{Python scientific stack}
+\begin{itemize}
+	\item \textbf{Numpy} is a data structure library for n-dimensional arrays. Instead of creating an object for each integer like vanilla Python, with related garbage collector overhead, it handles array in contiguous memory space like C. Another big performance advantage is through vectorized operations, that permit to modify multiple array elements with a syntax like they were a single value. For example, if \texttt{arr} is an array of $n$ elements, to multiply each element for the constant value 3, one doesn't need to use a cycle that iterate on array, but can just write \texttt{arr * 3}. This is not just syntactic sugar, but it offers to the interpreter additional informations, like that the operation would be on all elements without interruption from side effects, implying a performance improvements thanks to of optimized cache usage.
+	\item \textbf{Pandas} is a package for data analysis. Its main data type is called \texttt{DataFrame} and represents a two-dimensional dataset.\texttt{DataFrame} can be easily created from \texttt{csv} files, offering various methods. It is possible to complete a project like this only with pandas, as it uses numpy underneath, but it offers a very expressive interface that needs a lot of logic beneath with a non negligible overhead. For this reason I reduced the Pandas usage and called it only when strictly necessary.
+	\item \textbf{Scipy} offers many mathematical routines on top of numpy arrays. I used mainly trigonometric functions like arctangent, cosine and sine. It has big precision constant for example for Pi and offers vectorized routines for cross and dot products.
+	\item \textbf{Matplotlib} is the most used python plotting library, most of the other plotting libraries are based on it trying to abstract and elevate its complex interface. Nevertheless one can create very appealing charts also with low-level Matplotlib methods, especially it offers full customization.
+\end{itemize}
+
+\section{Quaternion libraries}
+
+My Project initially started with \textbf{numpy-quaternion} \cite{numpy-quaternion} but then moved to \textbf{pyquaternion} \cite{pyquaternion} because of the following reason:
+\begin{itemize}
+\item \textbf{moble/quaternion} didn't work on Windows \footnote{ as per commit 03d627 the library works on Windows but it was fixed too late for this work}, as stated in the readme. This was a blocking issue because the 3D artist of the group was using a Windows workstation.
+\item \textbf{pyquaternion} has a better documentation and more high-level methods
+\end{itemize}
+
+On the downside pyquaternion has performance disadvantages. As an example the following code using \textbf{numpy-quaternion}
+\begin{changemargin}{-1cm}{-1cm}
+\begin{lstlisting}[language=Python,frame=single]
+from numpy_quaternion import quaternion as Quaternion
+quaternions = np.array(
+[np.exp(Quaternion(*np.asarray(delta_theta)) / 2) for delta_theta in delta_thetas]
+)
+\end{lstlisting}
+\end{changemargin}
+runs in 0.665 milliseconds \\
+while the following code using \textbf{pyquaternion} 
+\begin{changemargin}{-1cm}{-1cm}
+\begin{lstlisting}[language=Python,frame=single]
+from pyquaternion import Quaternion
+quaternions = np.array(
+[Quaternion.exp(Quaternion(vector=delta_theta)/2) for delta_theta in delta_thetas]
+)
+\end{lstlisting}
+\end{changemargin}
+runs in 24.6 milliseconds, both with an array of 100 records

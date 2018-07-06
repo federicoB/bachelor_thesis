@@ -1,0 +1,15 @@
+%\let\textcircled=\pgftextcircled
+\chapter{Conclusions}
+\label{chap:conclusions}
+
+The thesis presented a software to reconstruct vehicle dynamics from inertial and GNSS data.
+I integrated physics quantities with a technique suitable for not equally spaced records. Both acceleration and angular velocity are integrated and angular position is composed gradually using quaternion performance advantage.
+Trajectory obtained from accelerometer and gyroscope is improved additionally by GNSS data, leading to a more precise and smooth path.
+The project has been implemented in Python, mainly exploiting Numpy as Pyquaternion libraries functionalities.
+I created a standalone Blender add-on which auto-installs its dependencies and offers a graphical interface. Much of the code has been proved with automated testing.
+
+\section{Future Development}
+% Allan variance analysis
+% Kalman filters
+% Change basis of interpolation
+% Parallelize

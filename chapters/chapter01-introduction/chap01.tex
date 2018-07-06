@@ -2,7 +2,7 @@
 \chapter{Introduction}
 \label{chap:intro}
 
-\textbf{Vehicle dynamics reconstruction} is a topic with much interest for automotive companies, car manufacturers and especially in insurance makers.
+\textbf{Vehicle dynamics reconstruction} is a topic with much interest in automotive companies, car manufacturers and especially insurance makers.
 Being able to analyze car behavior in real time can give an enforced picture about driving style, road assessment, car occupancy and so on. Besides, the case of very important events, like a car crash, to have a clear picture of the dynamics prior to the accident can help determine responsibilities and liabilities.
 With the tool i will describe in this thesis, dynamics of a car can be represented visually using data coming from a vehicle black box.
 This thesis will in fact analyze techniques for dynamic reconstruction based on inertial and GNSS data used in a related software project. \\
@@ -61,14 +61,27 @@ The following table shows \textit{full-inertial} data format in the order in whi
 6 & Acceleration X & Float & g-unit & Inertial \\ \hline
 7 & Acceleration Y & Float & g-unit & Inertial \\ \hline
 8 & Acceleration Z & Float & g-unit & Inertial \\ \hline
-9 & Angular speed X & Float & Degrees/Seconds & \begin{tabular}[c]{@{}c@{}}right-handed \\ reference system\end{tabular} \\ \hline
-10 & Angular speed Y & Float & Degrees/Seconds & \begin{tabular}[c]{@{}c@{}}right-handed \\ reference system\end{tabular} \\ \hline
-11 & Angular speed Z & Float & Degrees/Seconds & \begin{tabular}[c]{@{}c@{}}right-handed \\ reference system\end{tabular} \\ \hline
+9 & Angular speed X & Float & Degrees/Second & \begin{tabular}[c]{@{}c@{}}right-handed \\ reference system\end{tabular} \\ \hline
+10 & Angular speed Y & Float & Degrees/Second & \begin{tabular}[c]{@{}c@{}}right-handed \\ reference system\end{tabular} \\ \hline
+11 & Angular speed Z & Float & Degrees/Second & \begin{tabular}[c]{@{}c@{}}right-handed \\ reference system\end{tabular} \\ \hline
 12 & Acceleration module & Float & g-unit &  \\ \hline
 13 & Relative time & Float & Seconds & From first record \\ \hline
 \end{tabular}
 \end{table}
 
 \justify
-Lastly, I decided to visualize the reconstructed trajectory animated on the 3D modeling software Blender. The decision is motivated by the fact that Blender is a popular open source software and has an API to interact with. Additionally, it's already used inside the research group and one of its member is a 3D-artist specialized on it.
+I decided to visualize the reconstructed trajectory animated on the 3D modeling software Blender. The decision is motivated by the fact that Blender is a popular open source software and has an API to interact with. Additionally, it's already used inside the research group and one of its member is a 3D-artist specialized on it.
 %TODO talk abot blender popularity with google trends as source?
+
+\section{State of art}
+The Physics Laboratory of the City inside the Physics of Complex Systems group has been involved for years in the development of solutions related to human mobility, both based on pedestrian and means of transport. For this reason, collaborations have been opened with numerous Italian companies: in the insurance business (for example Unipol Gruppo S.p.A.), in the electronic branch (for example Octo Telematics Ltd), and in the industrial branch (for example Meta System SpA and TEXA SpA). From these collaborations varius activities were born: inertial sensors development and validation, product integration for the creation of "black boxes" for cars and the study of techniques for the validation of the collected data and the reconstruction of the dynamics through the recorded data. \\
+My thesis work has been inserted in the activities carried out by the group for these last two points. The data come in fact from prototype devices made by MetaSystem and collected directly on-board via a serial connection between the devices and a system based on Raspberry Pi. \\
+The whole on-board processing chain, serial transmission and registration on RPi device has been validated by the group during the years of activity and has led to the development of numerous tools used indirectly in this Thesis. 
+\\
+Road vehicle crashes reconstruction has already been a case study, with for both inertial and GNSS data, for example in the work of S.Tadic et al. \cite{7733120} \\
+None of the work I found never dealed with computational problems, neither provided a 3D visualization of the reconstruction.
+
+\section{Document structure}
+This thesis consist of 9 chapter: after this introduction, we will look to some mathematical notions necessary to comprehends techniques used in the project, then I will write about what programming language I decided to use and what libraries \\
+The characters that follows are a description of the principal code parts: error reduction, vehicle rotation, numerical integration and the Blender add-on. Then I included a part about software engineering practice i followed in developing this project. \\
+Finally a conclusion chapter, with a recap of all topics covered and description of possible future improvements.
