@@ -115,16 +115,32 @@ Performance can be evaluated at a high-level by counting the number of operation
 In the following analysis I will leave out performance optimization that computer systems can apply in some situations, like for example the simultaneous calculations of sine and cosine performed by modern machine. Just looking at number of operations should give a general idea of difference between rotation representations. \\
 Axis-angle to matrix conversion requires 13 additions, 15 multiplications and 2 trigonometric calls. \\
 Axis-angle to quaternion conversion requires 4 multiplications and 2 trigonometric calls. \\
-Rotating a vector using a rotation matrix requires 5 additions and 9 multiplications. \\
+Rotating a vector using a rotation matrix requires 6 additions and 9 multiplications. \\
 Rotating a vector using a quaternion, optimizing considering its scalar part zero, requires 17 additions and and 24 multiplications. \\
 % add table?
 So it results that rotation matrix are more efficient in rotating a vector, but the real advantage of quaternions are rotation compositions. 
 Indeed, composing two quaternions require only 12 additions and 16 multiplications while matrices, would have required 18 additions and 27 multiplications. \\
-What follows is a comparison analysis of the number of operations required to rotate $n$ vectors by a cumulative $n$ angles represented as axis-angle notation.
-Those abbreviations are used: $A$: Additions / subtractions, $M$ : Multiplications, $F$: trigonometric Functions
-%TODO convert to table?
+\begin{table}[H]
+\begin{tabular}{llll}
+ & A & M & F \\ \hline
+\rowcolor[HTML]{FD6864} 
+Axis-Angle to Matrix & 13 & 15 & 2 \\
+\rowcolor[HTML]{9AFF99} 
+Axis-Angle to Quaternion & 0 & 4 & 2 \\ \hline \hline
+\rowcolor[HTML]{9AFF99} 
+Rotation with Matrix & 6 & 9 & 0 \\
+\rowcolor[HTML]{FD6864} 
+Rotation with Quaternion & 17 & 24 & 0 \\ \hline \hline
+\rowcolor[HTML]{FD6864} 
+Matrices composition & 18 & 27 & 0 \\
+\rowcolor[HTML]{9AFF99} 
+Quaternions composition & 12 & 16 & 0 \\ \hline
+\end{tabular}
+\end{table}
+Those abbreviations are used: $A$: Additions / subtractions, $M$ : Multiplications, $F$: trigonometric Functions \\
+What follows is a comparison analysis of the number of operations required to rotate $n$ vectors by a cumulative $n$ angles represented as axis-angle notation. \\
 \begin{itemize}
-\item rotation matrices: ${((13A + 15M + 2F) + (5A + 9M) + (18A + 27M))n} = {(36A + 51M + 2F)n}$
+\item rotation matrices: ${((13A + 15M + 2F) + (6A + 9M) + (18A + 27M))n} = {(37A + 51M + 2F)n}$
 \item quaternions: ${((4M + 2F) + (17A + 24M) + (12A + 16M))n} = {(29A + 44M + 2F)n}$
 \end{itemize}
 % faster converting to matrix than using quaternions
