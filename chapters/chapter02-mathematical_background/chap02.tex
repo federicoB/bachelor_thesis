@@ -10,7 +10,7 @@ The second part deals with quaternion, a number system useful to handle rotation
 Records in input dataset may not be equally spaced, which means that if $t_i$ is a timestamp of a record at position $i$, then $\exists k, (t_{k}-t_{k-1})\neq (t_{k+1}-t_k)$. \\
 This implies that I can't use Simpson integration method, because it's a Newton-Cotes quadrature rule and it assumes that data points are equally spaced. \cite{casciola} \\
 Using a similar approach, interpolating with a second grade polynomial, I implemented an algorithm suitable for \textbf{irregularly spaced data.} \cite{integrating-irregularly} \\
-Let's considering these consecutive points $(t_1,y_1),(t_2,y_2),(t_3,y_3)$ and a finite space of real functions, with its base of representation $\phi_0,\phi_1,...,\phi_n$.
+Let's consider these consecutive points $(t_1,y_1),(t_2,y_2),(t_3,y_3)$ and a finite space of real functions, with its base of representation $\phi_0,\phi_1,...,\phi_n$.
 Each function of the space can be defined as a linear combination of the basis:
 $$ \phi(x) = \sum_{i=0}^n a_i \phi (x)$$ 
 Let's also consider the canonic form, where the basis are monomial $\phi_i=x^i$ $\forall_{i=0}^n$ \\
@@ -64,7 +64,7 @@ $$
 \int_{t_1}^{t_3} y(x)dx = \int_{t_1}^{t_3} ax^2 + by + c dx = \left[\frac{a}{3}x^3+\frac{b}{2}x^2+c{x}\right]_{t_1}^{t_3} 
 $$
 $$= \frac{a}{3}(t_3-t_1)^3+\frac{b}{2}(t_3-t_1)^2+c(t_3-t_1)$$
-Unlike classic Simpson method, this allow us to calculate also half of the area bound by the parabola, simply evaluating integral $\int_{t_1}^{t_2} y(x)\,dx$ or $\int_{t_2}^{t_3} y(x)\,dx$ instead of $\int_{t_1}^{t_3} y(x)\,dx $
+Unlike classic Simpson method, this allows us to calculate also only a part of the area bound by the parabola, simply evaluating integral $\int_{t_1}^{t_2} y(x)\,dx$ or $\int_{t_2}^{t_3} y(x)\,dx$ instead of $\int_{t_1}^{t_3} y(x)\,dx $
 
 \section{Quaternions}
 Quaternions are an extension of complex numbers usually represented in the form:
