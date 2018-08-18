@@ -21,10 +21,7 @@
 	\SetWatermarkScale{0.3}
 	\SetWatermarkText{\bf Draft: \today}
 \fi
-%
-% Declare figure/table as a subfloat.
-\newsubfloat{figure}
-\newsubfloat{table}
+
 % Better page layout for A4 paper, see memoir manual.
 \settrimmedsize{297mm}{210mm}{*}
 \setlength{\trimtop}{0pt} 
@@ -128,187 +125,40 @@
 \usepackage{import}
 
 % Add other packages needed for chapters here. For example:
-\usepackage{lipsum}					%Needed to create dummy text
+
 \usepackage{amsfonts} 		{}			%Calls Amer. Math. Soc. (AMS) fonts
 \usepackage[centertags]{amsmath}			%Writes maths centred down
-\usepackage{stmaryrd}					%New AMS symbols
-\usepackage{amssymb}					%Calls AMS symbols
-\usepackage{amsthm}					%Calls AMS theorem environment
-\usepackage{newlfont}					%Helpful package for fonts and symbols
 \usepackage{layouts}					%Layout diagrams
 \usepackage{graphicx}					%Calls figure environment
 \usepackage{wrapfig}
 \usepackage{ragged2e}
-\usepackage{longtable,rotating}			%Long tab environments including rotation. 
+\usepackage{longtable}			%Long tab environments including rotation. 
 \usepackage[utf8]{inputenc}			%Needed to encode non-english characters 
-									%directly for mac
 \usepackage{colortbl}					%Makes coloured tables
-\usepackage{wasysym}					%More math symbols
-\usepackage{mathrsfs}					%Even more math symbols
 \usepackage{float}						%Helps to place figures, tables, etc. 
 \floatstyle{boxed} 
 \restylefloat{figure}
 \usepackage{verbatim}					%Permits pre-formated text insertion
-\usepackage{upgreek }					%Calls other kind of greek alphabet
-\usepackage{latexsym}					%Extra symbols
 \usepackage[style=numeric,maxnames=50]{biblatex}
 \usepackage{url}{{}}						%Supports url commands
-% \usepackage{etex}						%eTeXÕs extended support for counters
-% \usepackage{fixltx2e}					%Eliminates some in felicities of the 
-									%original LaTeX kernel
-\usepackage[spanish,english]{babel}		%For languages characters and hyphenation
+\usepackage[english]{babel}		%For languages characters and hyphenation
 \usepackage{color}                                             %Creates coloured text and background
 \usepackage[colorlinks=true,
                     allcolors=black,
                     bookmarks]{hyperref}              %Creates hyperlinks in cross references
-\usepackage{memhfixc}					%Must be used on memoir document 
-									%class after hyperref
+\usepackage{memhfixc}					%Must be used on memoir document class after hyperref
 \usepackage{enumerate}					%For enumeration counter
 \usepackage{footnote}					%For footnotes
 \usepackage{microtype}					%Makes pdf look better.
-\usepackage{rotfloat}					%For rotating and float environments as tables, 
-									%figures, etc. 
-\usepackage{alltt}						%LaTeX commands are not disabled in 
-									%verbatim-like environment
-\usepackage[version=0.96]{pgf}			%PGF/TikZ is a tandem of languages for producing vector graphics from a 
-\usepackage{tikz}						%geometric/algebraic description.
+\usepackage{alltt}						%LaTeX commands are not disabled in verbatim-like environment
 \usepackage{listings}				% for source code
-\usetikzlibrary{arrows,shapes,snakes,
-		       automata,backgrounds,
-		       petri,topaths}				%To use diverse features from tikz		
+	
 %							
 %Reduce widows  (the last line of a paragraph at the start of a page) and orphans 
 % (the first line of paragraph at the end of a page)
 \widowpenalty=1000
 \clubpenalty=1000
-%
-% New command definitions for my thesis
-%
-\setlength\parindent{0pt}
-\newcommand{\keywords}[1]{\par\noindent{\small{\bf Keywords:} #1}} %Defines keywords small section
-\newcommand{\parcial}[2]{\frac{\partial#1}{\partial#2}}                             %Defines a partial operator
-\newcommand{\vectorr}[1]{\mathbf{#1}}                                                        %Defines a bold vector
-\newcommand{\vecol}[2]{\left(                                                                         %Defines a column vector
-	\begin{array}{c} 
-		\displaystyle#1 \\
-		\displaystyle#2
-	\end{array}\right)}
-\newcommand{\mados}[4]{\left(                                                                       %Defines a 2x2 matrix
-	\begin{array}{cc}
-		\displaystyle#1 &\displaystyle #2 \\
-		\displaystyle#3 & \displaystyle#4
-	\end{array}\right)}
-\newcommand{\pgftextcircled}[1]{                                                                    %Defines encircled text
-    \setbox0=\hbox{#1}%
-    \dimen0\wd0%
-    \divide\dimen0 by 2%
-    \begin{tikzpicture}[baseline=(a.base)]%
-        \useasboundingbox (-\the\dimen0,0pt) rectangle (\the\dimen0,1pt);
-        \node[circle,draw,outer sep=0pt,inner sep=0.1ex] (a) {#1};
-    \end{tikzpicture}
-}
-\newcommand{\range}[1]{\textnormal{range }#1}                                             %Defines range operator
-\newcommand{\innerp}[2]{\left\langle#1,#2\right\rangle}                                 %Defines inner product
-\newcommand{\prom}[1]{\left\langle#1\right\rangle}                                         %Defines average operator
-\newcommand{\tra}[1]{\textnormal{tra} \: #1}                                                       %Defines trace operator
-\newcommand{\sign}[1]{\textnormal{sign\,}#1}                                                   %Defines sign operator
-\newcommand{\sech}[1]{\textnormal{sech} #1}                                                  %Defines sech
-\newcommand{\diag}[1]{\textnormal{diag} #1}                                                    %Defines diag operator
-\newcommand{\arcsech}[1]{\textnormal{arcsech} #1}                                       %Defines arcsech
-\newcommand{\arctanh}[1]{\textnormal{arctanh} #1}                                         %Defines arctanh
-%Change tombstone symbol
-\newcommand{\blackged}{\hfill$\blacksquare$}
-\newcommand{\whiteged}{\hfill$\square$}
-\newcounter{proofcount}
-\renewenvironment{proof}[1][\proofname.]{\par
- \ifnum \theproofcount>0 \pushQED{\whiteged} \else \pushQED{\blackged} \fi%
- \refstepcounter{proofcount}
- \normalfont 
- \trivlist
- \item[\hskip\labelsep
-       \itshape
-   {\bf\em #1}]\ignorespaces
-}{%
- \addtocounter{proofcount}{-1}
- \popQED\endtrivlist
-}
-%
-%
-% New definition of square root:
-% it renames \sqrt as \oldsqrt
-\let\oldsqrt\sqrt
-% it defines the new \sqrt in terms of the old one
-\def\sqrt{\mathpalette\DHLhksqrt}
-\def\DHLhksqrt#1#2{%
-\setbox0=\hbox{$#1\oldsqrt{#2\,}$}\dimen0=\ht0
-\advance\dimen0-0.2\ht0
-\setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
-{\box0\lower0.4pt\box2}}
-%
-% My caption style
-\newcommand{\mycaption}[2][\@empty]{
-	\captionnamefont{\scshape} 
-	\changecaptionwidth
-	\captionwidth{0.9\linewidth}
-	\captiondelim{.\:} 
-	\indentcaption{0.75cm}
-	\captionstyle[\centering]{}
-	\setlength{\belowcaptionskip}{10pt}
-	\ifx \@empty#1 \caption{#2}\else \caption[#1]{#2}
-}
-%
-% My subcaption style
-\newcommand{\mysubcaption}[2][\@empty]{
-	\subcaptionsize{\small}
-	\hangsubcaption
-	\subcaptionlabelfont{\rmfamily}
-	\sidecapstyle{\raggedright}
-	\setlength{\belowcaptionskip}{10pt}
-	\ifx \@empty#1 \subcaption{#2}\else \subcaption[#1]{#2}
-}
-%
-%An initial of the very first character of the content
-\usepackage{lettrine}
-\newcommand{\initial}[1]{%
-	\lettrine[lines=3,lhang=0.33,nindent=0em]{
-		\color{gray}
-     		{\textsc{#1}}}{}}
-%
-% Theorem styles used in my thesis
-%
-\theoremstyle{plain}
-\newtheorem{theo}{Theorem}[chapter]
-\theoremstyle{plain}
-\newtheorem{prop}{Proposition}[chapter]
-\theoremstyle{plain}
-\theoremstyle{definition}
-\newtheorem{dfn}{Definition}[chapter]
-\theoremstyle{plain}
-\newtheorem{lema}{Lemma}[chapter]
-\theoremstyle{plain}
-\newtheorem{cor}{Corollary}[chapter]
-\theoremstyle{plain}
-\newtheorem{resu}{Result}[chapter]
-%
-% Hyphenation for some words
-%
-\hyphenation{res-pec-tively}
-\hyphenation{mono-ti-ca-lly}
-\hyphenation{hypo-the-sis}
-\hyphenation{para-me-ters}
-\hyphenation{sol-va-bi-li-ty}
 
-
-\newenvironment{changemargin}[2]{%
-\begin{list}{}{%
-\setlength{\topsep}{0pt}%
-\setlength{\leftmargin}{#1}%
-\setlength{\rightmargin}{#2}%
-\setlength{\listparindent}{\parindent}%
-\setlength{\itemindent}{\parindent}%
-\setlength{\parsep}{\parskip}%
-}%
-\item[]}{\end{list}}
 
 \bibliography{federico_bertani_tesi}
 
