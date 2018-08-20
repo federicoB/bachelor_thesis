@@ -143,6 +143,8 @@
 \usepackage{url}{{}}						%Supports url commands
 \usepackage[english]{babel}		%For languages characters and hyphenation
 \usepackage{color}                                             %Creates coloured text and background
+\usepackage{xcolor}
+\usepackage{subcaption}
 \usepackage[colorlinks=true,
                     allcolors=black,
                     bookmarks]{hyperref}              %Creates hyperlinks in cross references
@@ -153,6 +155,17 @@
 \usepackage{alltt}						%LaTeX commands are not disabled in verbatim-like environment
 \usepackage{listings}				% for source code
 	
+\newenvironment{changemargin}[2]{%	
+\begin{list}{}{%	
+\setlength{\topsep}{0pt}%	
+\setlength{\leftmargin}{#1}%	
+\setlength{\rightmargin}{#2}%	
+\setlength{\listparindent}{\parindent}%	
+\setlength{\itemindent}{\parindent}%	
+\setlength{\parsep}{\parskip}%	
+}%	
+\item[]}{\end{list}}
+
 %							
 %Reduce widows  (the last line of a paragraph at the start of a page) and orphans 
 % (the first line of paragraph at the end of a page)
