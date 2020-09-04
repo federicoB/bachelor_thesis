@@ -2,7 +2,7 @@
 
 # Reconstruction of vehicle dynamics from inertial and GNSS data
 
-[PDF LINK](https://github.com/federicoB/bachelor_thesis/blob/master/federico_bertani_tesi.pdfP)
+[PDF LINK](https://github.com/federicoB/bachelor_thesis/blob/master/federico_bertani_tesi.pdf)
 
 This is my bachelor thesis, written for my graduation on the 18th of july 2018 from University of Bologna (Italy).
 
